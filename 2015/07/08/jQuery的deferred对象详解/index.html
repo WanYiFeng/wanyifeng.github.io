@@ -1,0 +1,225 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="万翼峰,万翼峰的学习笔记,学习笔记,前端,web,js,html,css,框架"><title>jQuery的deferred对象详解 | 学习笔记</title><link rel="stylesheet" type="text/css" href="//fonts.css.network/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.3.0"><link rel="stylesheet" type="text/css" href="/css/highlight.css?v=1.3.0"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">jQuery的deferred对象详解</h1><a id="logo" href="/.">学习笔记</a><p class="description">学习是一种信仰!!</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h1 class="post-title">jQuery的deferred对象详解</h1><div class="post-meta">Jul 8, 2015<span> | </span><span class="category"><a href="/categories/ajax/">ajax</a></span></div><a data-thread-key="2015/07/08/jQuery的deferred对象详解/" href="/2015/07/08/jQuery的deferred对象详解/#comments" class="ds-thread-count"></a><div class="post-content"><p><strong>jQuery的deferred对象详解</strong></p>
+<p>作者：阮一峰</p>
+<p><img src="http://image.beekka.com/blog/201108/bg2011081601.jpg" alt="img"></p>
+<p><strong>一、什么是deferred对象？</strong></p>
+<p>开发网站的过程中，我们经常遇到某些耗时很长的javascript操作。其中，既有异步的操作（比如ajax读取服务器数据），也有同步的操作（比如遍历一个大型数组），它们都不是立即能得到结果的。</p>
+<p>通常的做法是，为它们指定回调函数（callback）。即事先规定，一旦它们运行结束，应该调用哪些函数。</p>
+<p>但是，在回调函数方面，jQuery的功能非常弱。为了改变这一点，jQuery开发团队就设计了<a href="http://api.jquery.com/category/deferred-object/" target="_blank" rel="noopener">deferred对象</a>。</p>
+<p><strong>简单说，deferred对象就是jQuery的回调函数解决方案。</strong>在英语中，defer的意思是”延迟”，所以deferred对象的含义就是”延迟”到未来某个点再执行。</p>
+<p>它解决了如何处理耗时操作的问题，对那些操作提供了更好的控制，以及统一的编程接口。它的主要功能，可以归结为四点。下面我们通过示例代码，一步步来学习。</p>
+<p><strong>二、ajax操作的链式写法</strong></p>
+<p>首先，回顾一下jQuery的ajax操作的传统写法：</p>
+<blockquote>
+<p>　　$.ajax({</p>
+<p>　　　　url: “test.html”,</p>
+<p>　　　　success: function(){<br>　　　　　　alert(“哈哈，成功了！”);<br>　　　　},</p>
+<p>　　　　error:function(){<br>　　　　　　alert(“出错啦！”);<br>　　　　}</p>
+<p>　　});</p>
+<p>（运行<a href="http://jsfiddle.net/ruanyf/pdQYH/" target="_blank" rel="noopener">代码示例1</a>）</p>
+</blockquote>
+<p>在上面的代码中，$.ajax()接受一个对象参数，这个对象包含两个方法：success方法指定操作成功后的回调函数，error方法指定操作失败后的回调函数。</p>
+<p>$.ajax()操作完成后，如果使用的是低于1.5.0版本的jQuery，返回的是XHR对象，你没法进行链式操作；如果高于1.5.0版本，返回的是deferred对象，可以进行链式操作。</p>
+<p>现在，新的写法是这样的：</p>
+<blockquote>
+<p>　　$.ajax(“test.html”)</p>
+<p>　　<strong>.done(function(){ alert(“哈哈，成功了！”); })</strong></p>
+<p>　　<strong>.fail(function(){ alert(“出错啦！”); });</strong></p>
+<p>（运行<a href="http://jsfiddle.net/ruanyf/dYKLJ/" target="_blank" rel="noopener">代码示例2</a>）</p>
+</blockquote>
+<p>可以看到，<a href="http://api.jquery.com/deferred.done/" target="_blank" rel="noopener">done()</a>相当于success方法，<a href="http://api.jquery.com/deferred.fail/" target="_blank" rel="noopener">fail()</a>相当于error方法。采用链式写法以后，代码的可读性大大提高。</p>
+<p><strong>三、指定同一操作的多个回调函数</strong></p>
+<p>deferred对象的一大好处，就是它允许你自由添加多个回调函数。</p>
+<p>还是以上面的代码为例，如果ajax操作成功后，除了原来的回调函数，我还想再运行一个回调函数，怎么办？</p>
+<p>很简单，直接把它加在后面就行了。</p>
+<blockquote>
+<p>　　$.ajax(“test.html”)</p>
+<p>　　.done(function(){ alert(“哈哈，成功了！”);} )</p>
+<p>　　.fail(function(){ alert(“出错啦！”); } )</p>
+<p>　　<strong>.done(function(){ alert(“第二个回调函数！”);} );</strong></p>
+<p>（运行<a href="http://jsfiddle.net/ruanyf/sQYjs/" target="_blank" rel="noopener">代码示例3</a>）</p>
+</blockquote>
+<p>回调函数可以添加任意多个，它们按照添加顺序执行。</p>
+<p><strong>四、为多个操作指定回调函数</strong></p>
+<p>deferred对象的另一大好处，就是它允许你为多个事件指定一个回调函数，这是传统写法做不到的。</p>
+<p>请看下面的代码，它用到了一个新的方法<a href="http://api.jquery.com/jQuery.when/" target="_blank" rel="noopener">$.when()</a>：</p>
+<blockquote>
+<p>　　<strong>$.when($.ajax(“test1.html”), $.ajax(“test2.html”))</strong></p>
+<p>　　.done(function(){ alert(“哈哈，成功了！”); })</p>
+<p>　　.fail(function(){ alert(“出错啦！”); });</p>
+<p>（运行<a href="http://jsfiddle.net/ruanyf/CdKjn/" target="_blank" rel="noopener">代码示例4</a>）</p>
+</blockquote>
+<p>这段代码的意思是，先执行两个操作$.ajax(“test1.html”)和$.ajax(“test2.html”)，如果都成功了，就运行done()指定的回调函数；如果有一个失败或都失败了，就执行fail()指定的回调函数。</p>
+<p><strong>五、普通操作的回调函数接口（上）</strong></p>
+<p>deferred对象的最大优点，就是它把这一套回调函数接口，从ajax操作扩展到了所有操作。也就是说，任何一个操作—-不管是ajax操作还是本地操作，也不管是异步操作还是同步操作—-都可以使用deferred对象的各种方法，指定回调函数。</p>
+<p>我们来看一个具体的例子。假定有一个很耗时的操作wait：</p>
+<blockquote>
+<p>　　var wait = function(){</p>
+<p>　　　　var tasks = function(){</p>
+<p>　　　　　　alert(“执行完毕！”);</p>
+<p>　　　　};</p>
+<p>　　　　setTimeout(tasks,5000);</p>
+<p>　　};</p>
+</blockquote>
+<p>我们为它指定回调函数，应该怎么做呢？</p>
+<p>很自然的，你会想到，可以使用$.when()：</p>
+<blockquote>
+<p>　　$.when(wait())</p>
+<p>　　.done(function(){ alert(“哈哈，成功了！”); })</p>
+<p>　　.fail(function(){ alert(“出错啦！”); });</p>
+<p>（运行<a href="http://jsfiddle.net/5wzrt/" target="_blank" rel="noopener">代码示例5</a>）</p>
+</blockquote>
+<p>但是，这样写的话，done()方法会立即执行，起不到回调函数的作用。原因在于$.when()的参数只能是deferred对象，所以必须对wait()进行改写：</p>
+<blockquote>
+<p>　　var dtd = $.Deferred(); // 新建一个deferred对象</p>
+<p>　　var wait = function(dtd){</p>
+<p>　　　　var tasks = function(){</p>
+<p>　　　　　　alert(“执行完毕！”);</p>
+<p>　　　　　　<strong>dtd.resolve();</strong> // 改变deferred对象的执行状态</p>
+<p>　　　　};</p>
+<p>　　　　setTimeout(tasks,5000);</p>
+<p>　　　　<strong>return dtd;</strong></p>
+<p>　　};</p>
+</blockquote>
+<p>现在，wait()函数返回的是deferred对象，这就可以加上链式操作了。</p>
+<blockquote>
+<p>　　$.when(wait(dtd))</p>
+<p>　　.done(function(){ alert(“哈哈，成功了！”); })</p>
+<p>　　.fail(function(){ alert(“出错啦！”); });</p>
+<p>（运行<a href="http://jsfiddle.net/gfFPj/" target="_blank" rel="noopener">代码示例6</a>）</p>
+</blockquote>
+<p>wait()函数运行完，就会自动运行done()方法指定的回调函数。</p>
+<p><strong>六、deferred.resolve()方法和deferred.reject()方法</strong></p>
+<p>如果仔细看，你会发现在上面的wait()函数中，还有一个地方我没讲解。那就是<a href="http://api.jquery.com/deferred.resolve" target="_blank" rel="noopener">dtd.resolve()</a>的作用是什么？</p>
+<p>要说清楚这个问题，就要引入一个新概念”执行状态”。jQuery规定，deferred对象有三种执行状态—-未完成，已完成和已失败。如果执行状态是”已完成”（resolved）,deferred对象立刻调用done()方法指定的回调函数；如果执行状态是”已失败”，调用fail()方法指定的回调函数；如果执行状态是”未完成”，则继续等待，或者调用<a href="http://api.jquery.com/deferred.progress/" target="_blank" rel="noopener">progress()</a>方法指定的回调函数（jQuery1.7版本添加）。</p>
+<p>前面部分的ajax操作时，deferred对象会根据返回结果，自动改变自身的执行状态；但是，在wait()函数中，这个执行状态必须由程序员手动指定。dtd.resolve()的意思是，将dtd对象的执行状态从”未完成”改为”已完成”，从而触发done()方法。</p>
+<p>类似的，还存在一个<a href="http://api.jquery.com/deferred.reject" target="_blank" rel="noopener">deferred.reject()</a>方法，作用是将dtd对象的执行状态从”未完成”改为”已失败”，从而触发fail()方法。</p>
+<blockquote>
+<p>　　var dtd = $.Deferred(); // 新建一个Deferred对象</p>
+<p>　　var wait = function(dtd){</p>
+<p>　　　　var tasks = function(){</p>
+<p>　　　　　　alert(“执行完毕！”);</p>
+<p>　　　　　　<strong>dtd.reject(); // 改变Deferred对象的执行状态</strong></p>
+<p>　　　　};</p>
+<p>　　　　setTimeout(tasks,5000);</p>
+<p>　　　　return dtd;</p>
+<p>　　};</p>
+<p>　　$.when(wait(dtd))</p>
+<p>　　.done(function(){ alert(“哈哈，成功了！”); })</p>
+<p>　　.fail(function(){ alert(“出错啦！”); });</p>
+<p>（运行<a href="http://jsfiddle.net/bhDjd/" target="_blank" rel="noopener">代码示例7</a>）</p>
+</blockquote>
+<p><strong>七、deferred.promise()方法</strong></p>
+<p>上面这种写法，还是有问题。那就是dtd是一个全局对象，所以它的执行状态可以从外部改变。</p>
+<p>请看下面的代码：</p>
+<blockquote>
+<p>　　var dtd = $.Deferred(); // 新建一个Deferred对象</p>
+<p>　　var wait = function(dtd){</p>
+<p>　　　　var tasks = function(){</p>
+<p>　　　　　　alert(“执行完毕！”);</p>
+<p>　　　　　　dtd.resolve(); // 改变Deferred对象的执行状态</p>
+<p>　　　　};</p>
+<p>　　　　setTimeout(tasks,5000);</p>
+<p>　　　　return dtd;</p>
+<p>　　};</p>
+<p>　　$.when(wait(dtd))</p>
+<p>　　.done(function(){ alert(“哈哈，成功了！”); })</p>
+<p>　　.fail(function(){ alert(“出错啦！”); });</p>
+<p>　　<strong>dtd.resolve();</strong></p>
+<p>（运行<a href="http://jsfiddle.net/nBFse/" target="_blank" rel="noopener">代码示例8</a>）</p>
+</blockquote>
+<p>我在代码的尾部加了一行dtd.resolve()，这就改变了dtd对象的执行状态，因此导致done()方法立刻执行，跳出”哈哈，成功了！”的提示框，等5秒之后再跳出”执行完毕！”的提示框。</p>
+<p>为了避免这种情况，jQuery提供了<a href="http://api.jquery.com/deferred.promise/" target="_blank" rel="noopener">deferred.promise()</a>方法。它的作用是，在原来的deferred对象上返回另一个deferred对象，后者只开放与改变执行状态无关的方法（比如done()方法和fail()方法），屏蔽与改变执行状态有关的方法（比如resolve()方法和reject()方法），从而使得执行状态不能被改变。</p>
+<p>请看下面的代码：</p>
+<blockquote>
+<p>　　var dtd = $.Deferred(); // 新建一个Deferred对象</p>
+<p>　　var wait = function(dtd){</p>
+<p>　　　　var tasks = function(){</p>
+<p>　　　　　　alert(“执行完毕！”);</p>
+<p>　　　　　　dtd.resolve(); // 改变Deferred对象的执行状态</p>
+<p>　　　　};<br>　　　　setTimeout(tasks,5000);</p>
+<p>　　　　<strong>return dtd.promise(); // 返回promise对象</strong></p>
+<p>　　};</p>
+<p>　　<strong>var d = wait(dtd); // 新建一个d对象，改为对这个对象进行操作</strong></p>
+<p>　　$.when(d)</p>
+<p>　　.done(function(){ alert(“哈哈，成功了！”); })</p>
+<p>　　.fail(function(){ alert(“出错啦！”); });</p>
+<p>　　<strong>d.resolve(); // 此时，这个语句是无效的</strong></p>
+<p>（运行<a href="http://jsfiddle.net/Yur4R/" target="_blank" rel="noopener">代码示例9</a>）</p>
+</blockquote>
+<p>在上面的这段代码中，wait()函数返回的是promise对象。然后，我们把回调函数绑定在这个对象上面，而不是原来的deferred对象上面。这样的好处是，无法改变这个对象的执行状态，要想改变执行状态，只能操作原来的deferred对象。</p>
+<p>不过，更好的写法是<a href="http://blog.allenm.me/2012/01/jquery_deferred_promise_method/" target="_blank" rel="noopener">allenm</a>所指出的，将dtd对象变成wait(）函数的内部对象。</p>
+<blockquote>
+<p>　　var wait = function(dtd){</p>
+<p>　　　　<strong>var dtd = $.Deferred(); //在函数内部，新建一个Deferred对象</strong></p>
+<p>　　　　var tasks = function(){</p>
+<p>　　　　　　alert(“执行完毕！”);</p>
+<p>　　　　　　dtd.resolve(); // 改变Deferred对象的执行状态</p>
+<p>　　　　};<br>　　　　setTimeout(tasks,5000);</p>
+<p>　　　　return dtd.promise(); // 返回promise对象</p>
+<p>　　};</p>
+<p>　　<strong>$.when(wait())</strong></p>
+<p>　　.done(function(){ alert(“哈哈，成功了！”); })</p>
+<p>　　.fail(function(){ alert(“出错啦！”); });</p>
+<p>（运行<a href="http://jsfiddle.net/q9TvT/" target="_blank" rel="noopener">代码示例10</a>）</p>
+</blockquote>
+<p><strong>八、普通操作的回调函数接口（中）</strong></p>
+<p>另一种防止执行状态被外部改变的方法，是使用deferred对象的建构函数$.Deferred()。</p>
+<p>这时，wait函数还是保持不变，我们直接把它传入$.Deferred()：</p>
+<blockquote>
+<p>　　<strong>$.Deferred(wait)</strong></p>
+<p>　　.done(function(){ alert(“哈哈，成功了！”); })</p>
+<p>　　.fail(function(){ alert(“出错啦！”); });</p>
+<p>（运行<a href="http://jsfiddle.net/ruanyf/CucGp/" target="_blank" rel="noopener">代码示例11</a>）</p>
+</blockquote>
+<p>jQuery规定，$.Deferred()可以接受一个函数名（注意，是函数名）作为参数，$.Deferred()所生成的deferred对象将作为这个函数的默认参数。</p>
+<p><strong>九、普通操作的回调函数接口（下）</strong></p>
+<p>除了上面两种方法以外，我们还可以直接在wait对象上部署deferred接口。</p>
+<blockquote>
+<p>　　var dtd = $.Deferred(); // 生成Deferred对象</p>
+<p>　　var wait = function(dtd){</p>
+<p>　　　　var tasks = function(){</p>
+<p>　　　　　　alert(“执行完毕！”);</p>
+<p>　　　　　　dtd.resolve(); // 改变Deferred对象的执行状态</p>
+<p>　　　　};</p>
+<p>　　　　setTimeout(tasks,5000);</p>
+<p>　　};</p>
+<p>　　<strong>dtd.promise(wait);</strong></p>
+<p>　　wait.done(function(){ alert(“哈哈，成功了！”); })</p>
+<p>　　.fail(function(){ alert(“出错啦！”); });</p>
+<p>　　wait(dtd);</p>
+<p>（运行<a href="http://jsfiddle.net/ruanyf/PF7Xf/" target="_blank" rel="noopener">代码示例12</a>）</p>
+</blockquote>
+<p>这里的关键是dtd.promise(wait)这一行，它的作用就是在wait对象上部署Deferred接口。正是因为有了这一行，后面才能直接在wait上面调用done()和fail()。</p>
+<p><strong>十、小结：deferred对象的方法</strong></p>
+<p>前面已经讲到了deferred对象的多种方法，下面做一个总结：</p>
+<p>　　（1） <a href="http://api.jquery.com/category/deferred-object/" target="_blank" rel="noopener">$.Deferred()</a> 生成一个deferred对象。</p>
+<p>　　（2） <a href="http://api.jquery.com/deferred.done/" target="_blank" rel="noopener">deferred.done()</a> 指定操作成功时的回调函数</p>
+<p>　　（3） <a href="http://api.jquery.com/deferred.fail/" target="_blank" rel="noopener">deferred.fail()</a> 指定操作失败时的回调函数</p>
+<p>　　（4） <a href="http://api.jquery.com/deferred.promise/" target="_blank" rel="noopener">deferred.promise()</a> 没有参数时，返回一个新的deferred对象，该对象的运行状态无法被改变；接受参数时，作用为在参数对象上部署deferred接口。</p>
+<p>　　（5） <a href="http://api.jquery.com/deferred.resolve/" target="_blank" rel="noopener">deferred.resolve()</a> 手动改变deferred对象的运行状态为”已完成”，从而立即触发done()方法。</p>
+<p>　　（6）<a href="http://api.jquery.com/deferred.reject/" target="_blank" rel="noopener">deferred.reject()</a> 这个方法与deferred.resolve()正好相反，调用后将deferred对象的运行状态变为”已失败”，从而立即触发fail()方法。</p>
+<p>　　（7） <a href="http://api.jquery.com/jQuery.when/" target="_blank" rel="noopener">$.when()</a> 为多个操作指定回调函数。</p>
+<p>除了这些方法以外，deferred对象还有二个重要方法，上面的教程中没有涉及到。</p>
+<p>　　（8）<a href="http://api.jquery.com/deferred.then/" target="_blank" rel="noopener">deferred.then()</a></p>
+<p>有时为了省事，可以把done()和fail()合在一起写，这就是then()方法。</p>
+<blockquote>
+<p>　　$.when($.ajax( “/main.php” ))</p>
+<p>　　<strong>.then(successFunc, failureFunc );</strong></p>
+</blockquote>
+<p>如果then()有两个参数，那么第一个参数是done()方法的回调函数，第二个参数是fail()方法的回调方法。如果then()只有一个参数，那么等同于done()。</p>
+<p>　　（9）<a href="http://api.jquery.com/deferred.always/" target="_blank" rel="noopener">deferred.always()</a></p>
+<p>这个方法也是用来指定回调函数的，它的作用是，不管调用的是deferred.resolve()还是deferred.reject()，最后总是执行。</p>
+<blockquote>
+<p>　　$.ajax( “test.html” )</p>
+<p>　　.always( function() { alert(“已执行！”);} );</p>
+</blockquote>
+<p>本文转载自<a href="http://www.ruanyifeng.com/blog/2011/08/a_detailed_explanation_of_jquery_deferred_object.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2011/08/a_detailed_explanation_of_jquery_deferred_object.html</a></p>
+</div><div class="tags"><a href="/tags/js/">js</a><a href="/tags/ajax/">ajax</a><a href="/tags/jQuery/">jQuery</a></div><div class="post-nav"><a href="/2015/07/11/js简单动画demo/" class="pre">js简单功能Demo</a><a href="/2015/07/05/前端实现长链接/" class="next">前端实现长链接</a></div><div data-thread-key="2015/07/08/jQuery的deferred对象详解/" data-title="jQuery的deferred对象详解" data-url="http://www.wanyifeng.top/2015/07/08/jQuery的deferred对象详解/" class="ds-share flat"><div class="ds-share-inline"><ul class="ds-share-icons-16"><li data-toggle="ds-share-icons-more"><a href="javascript:void(0);" class="ds-more">分享到:</a></li><li><a href="javascript:void(0);" data-service="weibo" class="ds-weibo">微博</a></li><li><a href="javascript:void(0);" data-service="qzone" class="ds-qzone">QQ空间</a></li><li><a href="javascript:void(0);" data-service="qqt" class="ds-qqt">腾讯微博</a></li><li><a href="javascript:void(0);" data-service="wechat" class="ds-wechat">微信</a></li></ul><div class="ds-share-icons-more"></div></div></div><div id="comments"><div data-thread-key="2015/07/08/jQuery的deferred对象详解/" data-title="jQuery的deferred对象详解" data-url="http://www.wanyifeng.top/2015/07/08/jQuery的deferred对象详解/" data-author-key="1" class="ds-thread"></div></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="widget"><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="请输入关键字..."/></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-gui"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Angular/">Angular</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bootstrap/">Bootstrap</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SQL/">SQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ajax/">ajax</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/canvas/">canvas</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/jQuery/">jQuery</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">32</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/node/">node</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂文/">杂文</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/构建工具/">构建工具</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/">移动端</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/轮子/">轮子</a><span class="category-list-count">13</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 标签</i></div><div class="tagcloud"><a href="/tags/canvas/" style="font-size: 15px;">canvas</a> <a href="/tags/js/" style="font-size: 15px;">js</a> <a href="/tags/Angular/" style="font-size: 15px;">Angular</a> <a href="/tags/构建工具/" style="font-size: 15px;">构建工具</a> <a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/兼容/" style="font-size: 15px;">兼容</a> <a href="/tags/HTML5/" style="font-size: 15px;">HTML5</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/http/" style="font-size: 15px;">http</a> <a href="/tags/jsonp/" style="font-size: 15px;">jsonp</a> <a href="/tags/MV/" style="font-size: 15px;">MV*</a> <a href="/tags/继承/" style="font-size: 15px;">继承</a> <a href="/tags/Vue/" style="font-size: 15px;">Vue</a> <a href="/tags/ajax/" style="font-size: 15px;">ajax</a> <a href="/tags/Bootstrap/" style="font-size: 15px;">Bootstrap</a> <a href="/tags/能力检测/" style="font-size: 15px;">能力检测</a> <a href="/tags/innerText/" style="font-size: 15px;">innerText</a> <a href="/tags/jQuery/" style="font-size: 15px;">jQuery</a> <a href="/tags/轮子/" style="font-size: 15px;">轮子</a> <a href="/tags/node/" style="font-size: 15px;">node</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/移动端/" style="font-size: 15px;">移动端</a> <a href="/tags/杂文/" style="font-size: 15px;">杂文</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a> <a href="/tags/动画/" style="font-size: 15px;">动画</a> <a href="/tags/SQL/" style="font-size: 15px;">SQL</a> <a href="/tags/服务器/" style="font-size: 15px;">服务器</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-fei"> 归档</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/04/26/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/03/简单sql入门(一)/">SQL入门(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/30/CSS3/">css3小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/30/python基础篇(二)/">python基础篇(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/28/python基础篇(一)/">python基础篇(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/01/bootstrap栅格系统使用/">bootstrap栅格系统使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/28/jq遮罩插件(对象版本)/">jq遮罩插件(对象版本)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/js字符串公共部分比较/">js字符串公共部分比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/21/前端工程发布优化/">前端工程-发布优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/18/js异步特性/">js异步特性</a></li></ul></div><div class="widget"><div class="comments-title"><i class="fa fa-commt"> 最近评论</i></div><div data-num-items="5" data-show-avatars="0" data-show-time="1" data-show-admin="0" data-excerpt-length="32" data-show-title="1" class="ds-recent-comments"></div></div></div></div></div><a id="totop" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.3.0" async></script><div id="footer"><div class="footer-info"><p><a href="/baidusitemap.xml">网站地图</a> |<span>联系博主：<a href="https://github.com/WanYiFeng" target="_blank" class="fa fa-github"> </a></span></p><p><span> 作者: &copy; <a href="/." rel="nofollow">万翼峰</a></span></p></div></div></div><script>var duoshuoQuery = {short_name:'wanyifeng'};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    document.getElementsByTagName('body')[0].appendChild(ds);
+})();
+</script><script type="text/javascript" src="/js/search.json.js?v=1.3.0"></script></body></html>

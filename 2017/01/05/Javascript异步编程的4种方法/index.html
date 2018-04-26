@@ -1,0 +1,114 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="万翼峰,万翼峰的学习笔记,学习笔记,前端,web,js,html,css,框架"><title>Javascript异步编程的4种方法 | 学习笔记</title><link rel="stylesheet" type="text/css" href="//fonts.css.network/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.3.0"><link rel="stylesheet" type="text/css" href="/css/highlight.css?v=1.3.0"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Javascript异步编程的4种方法</h1><a id="logo" href="/.">学习笔记</a><p class="description">学习是一种信仰!!</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h1 class="post-title">Javascript异步编程的4种方法</h1><div class="post-meta">Jan 5, 2017<span> | </span><span class="category"><a href="/categories/js/">js</a></span></div><a data-thread-key="2017/01/05/Javascript异步编程的4种方法/" href="/2017/01/05/Javascript异步编程的4种方法/#comments" class="ds-thread-count"></a><div class="post-content"><p>作者： <a href="http://www.ruanyifeng.com/" target="_blank" rel="noopener">阮一峰</a></p>
+<p>日期： <a href="http://www.ruanyifeng.com/blog/2012/12/" target="_blank" rel="noopener">2012年12月21日</a></p>
+<p>你可能知道，Javascript语言的执行环境是”单线程”（single thread）。</p>
+<p>所谓”单线程”，就是指一次只能完成一件任务。如果有多个任务，就必须排队，前面一个任务完成，再执行后面一个任务，以此类推。</p>
+<p><img src="http://image.beekka.com/blog/201212/bg2012122101.jpg" alt="img"></p>
+<p>这种模式的好处是实现起来比较简单，执行环境相对单纯；坏处是只要有一个任务耗时很长，后面的任务都必须排队等着，会拖延整个程序的执行。常见的浏览器无响应（假死），往往就是因为某一段Javascript代码长时间运行（比如死循环），导致整个页面卡在这个地方，其他任务无法执行。</p>
+<p>为了解决这个问题，Javascript语言将任务的执行模式分成两种：同步（Synchronous）和异步（Asynchronous）。</p>
+<p>“同步模式”就是上一段的模式，后一个任务等待前一个任务结束，然后再执行，程序的执行顺序与任务的排列顺序是一致的、同步的；”异步模式”则完全不同，每一个任务有一个或多个回调函数（callback），前一个任务结束后，不是执行后一个任务，而是执行回调函数，后一个任务则是不等前一个任务结束就执行，所以程序的执行顺序与任务的排列顺序是不一致的、异步的。</p>
+<p>“异步模式”非常重要。在浏览器端，耗时很长的操作都应该异步执行，避免浏览器失去响应，最好的例子就是Ajax操作。在服务器端，”异步模式”甚至是唯一的模式，因为执行环境是单线程的，如果允许同步执行所有http请求，服务器性能会急剧下降，很快就会失去响应。</p>
+<p>本文总结了”异步模式”编程的4种方法，理解它们可以让你写出结构更合理、性能更出色、维护更方便的Javascript程序。</p>
+<p><strong>一、回调函数</strong></p>
+<p>这是异步编程最基本的方法。</p>
+<p>假定有两个函数f1和f2，后者等待前者的执行结果。</p>
+<blockquote>
+<p>　　f1();</p>
+<p>　　f2();</p>
+</blockquote>
+<p>如果f1是一个很耗时的任务，可以考虑改写f1，把f2写成f1的回调函数。</p>
+<blockquote>
+<p>　　function f1(callback){</p>
+<p>　　　　setTimeout(function () {</p>
+<p>　　　　　　// f1的任务代码</p>
+<p>　　　　　　callback();</p>
+<p>　　　　}, 1000);</p>
+<p>　　}</p>
+</blockquote>
+<p>执行代码就变成下面这样：</p>
+<blockquote>
+<p>　　f1(f2);</p>
+</blockquote>
+<p>采用这种方式，我们把同步操作变成了异步操作，f1不会堵塞程序运行，相当于先执行程序的主要逻辑，将耗时的操作推迟执行。</p>
+<p>回调函数的优点是简单、容易理解和部署，缺点是不利于代码的阅读和维护，各个部分之间高度<a href="http://en.wikipedia.org/wiki/Coupling_(computer_programming" target="_blank" rel="noopener">耦合</a>)（Coupling），流程会很混乱，而且每个任务只能指定一个回调函数。</p>
+<p><strong>二、事件监听</strong></p>
+<p>另一种思路是采用事件驱动模式。任务的执行不取决于代码的顺序，而取决于某个事件是否发生。</p>
+<p>还是以f1和f2为例。首先，为f1绑定一个事件（这里采用的jQuery的<a href="http://api.jquery.com/on/" target="_blank" rel="noopener">写法</a>）。</p>
+<blockquote>
+<p>　　f1.on(‘done’, f2);</p>
+</blockquote>
+<p>上面这行代码的意思是，当f1发生done事件，就执行f2。然后，对f1进行改写：</p>
+<blockquote>
+<p>　　function f1(){</p>
+<p>　　　　setTimeout(function () {</p>
+<p>　　　　　　// f1的任务代码</p>
+<p>　　　　　　<strong>f1.trigger(‘done’);</strong></p>
+<p>　　　　}, 1000);</p>
+<p>　　}</p>
+</blockquote>
+<p>f1.trigger(‘done’)表示，执行完成后，立即触发done事件，从而开始执行f2。</p>
+<p>这种方法的优点是比较容易理解，可以绑定多个事件，每个事件可以指定多个回调函数，而且可以<a href="http://en.wikipedia.org/wiki/Decoupling" target="_blank" rel="noopener">“去耦合”</a>（Decoupling），有利于实现<a href="http://www.ruanyifeng.com/blog/2012/10/javascript_module.html" target="_blank" rel="noopener">模块化</a>。缺点是整个程序都要变成事件驱动型，运行流程会变得很不清晰。</p>
+<p><strong>三、发布/订阅</strong></p>
+<p>上一节的”事件”，完全可以理解成”信号”。</p>
+<p>我们假定，存在一个”信号中心”，某个任务执行完成，就向信号中心”发布”（publish）一个信号，其他任务可以向信号中心”订阅”（subscribe）这个信号，从而知道什么时候自己可以开始执行。这就叫做<a href="http://en.wikipedia.org/wiki/Publish-subscribe_pattern" target="_blank" rel="noopener">“发布/订阅模式”</a>（publish-subscribe pattern），又称<a href="http://en.wikipedia.org/wiki/Observer_pattern" target="_blank" rel="noopener">“观察者模式”</a>（observer pattern）。</p>
+<p>这个模式有多种<a href="http://msdn.microsoft.com/en-us/magazine/hh201955.aspx" target="_blank" rel="noopener">实现</a>，下面采用的是Ben Alman的<a href="https://gist.github.com/661855" target="_blank" rel="noopener">Tiny Pub/Sub</a>，这是jQuery的一个插件。</p>
+<p>首先，f2向”信号中心”jQuery订阅”done”信号。</p>
+<blockquote>
+<p>　　jQuery.subscribe(“done”, f2);</p>
+</blockquote>
+<p>然后，f1进行如下改写：</p>
+<blockquote>
+<p>　　function f1(){</p>
+<p>　　　　setTimeout(function () {</p>
+<p>　　　　　　// f1的任务代码</p>
+<p>　　　　　　<strong>jQuery.publish(“done”);</strong></p>
+<p>　　　　}, 1000);</p>
+<p>　　}</p>
+</blockquote>
+<p>jQuery.publish(“done”)的意思是，f1执行完成后，向”信号中心”jQuery发布”done”信号，从而引发f2的执行。</p>
+<p>此外，f2完成执行后，也可以取消订阅（unsubscribe）。</p>
+<blockquote>
+<p>　　jQuery.unsubscribe(“done”, f2);</p>
+</blockquote>
+<p>这种方法的性质与”事件监听”类似，但是明显优于后者。因为我们可以通过查看”消息中心”，了解存在多少信号、每个信号有多少订阅者，从而监控程序的运行。</p>
+<p><strong>四、Promises对象</strong></p>
+<p>Promises对象是CommonJS工作组提出的一种规范，目的是为异步编程提供<a href="http://wiki.commonjs.org/wiki/Promises/A" target="_blank" rel="noopener">统一接口</a>。</p>
+<p>简单说，它的思想是，每一个异步任务返回一个Promise对象，该对象有一个then方法，允许指定回调函数。比如，f1的回调函数f2,可以写成：</p>
+<blockquote>
+<p>　　f1().then(f2);</p>
+</blockquote>
+<p>f1要进行如下改写（这里使用的是jQuery的<a href="http://www.ruanyifeng.com/blog/2011/08/a_detailed_explanation_of_jquery_deferred_object.html" target="_blank" rel="noopener">实现</a>）：</p>
+<blockquote>
+<p>　　function f1(){</p>
+<p>　　　　var dfd = $.Deferred();</p>
+<p>　　　　setTimeout(function () {</p>
+<p>　　　　　　// f1的任务代码</p>
+<p>　　　　　　dfd.resolve();</p>
+<p>　　　　}, 500);</p>
+<p>　　　　<strong>return dfd.promise;</strong></p>
+<p>　　}</p>
+</blockquote>
+<p>这样写的优点在于，回调函数变成了链式写法，程序的流程可以看得很清楚，而且有一整套的<a href="http://api.jquery.com/category/deferred-object/" target="_blank" rel="noopener">配套方法</a>，可以实现许多强大的功能。</p>
+<p>比如，指定多个回调函数：</p>
+<blockquote>
+<p>　　f1().then(f2).then(f3);</p>
+</blockquote>
+<p>再比如，指定发生错误时的回调函数：</p>
+<blockquote>
+<p>　　f1().then(f2).fail(f3);</p>
+</blockquote>
+<p>而且，它还有一个前面三种方法都没有的好处：如果一个任务已经完成，再添加回调函数，该回调函数会立即执行。所以，你不用担心是否错过了某个事件或信号。这种方法的缺点就是编写和理解，都相对比较难。</p>
+<p><strong>五、参考链接</strong></p>
+<ul>
+<li><a href="http://sporto.github.com/blog/2012/12/09/callbacks-listeners-promises/" target="_blank" rel="noopener">Asynchronous JS: Callbacks, Listeners, Control Flow Libs and Promises</a></li>
+</ul>
+<p>（完）</p>
+<p>转载自<a href="http://www.ruanyifeng.com/blog/2012/12/asynchronous%EF%BC%BFjavascript.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2012/12/asynchronous%EF%BC%BFjavascript.html</a></p>
+</div><div class="tags"><a href="/tags/js/">js</a><a href="/tags/ajax/">ajax</a></div><div class="post-nav"><a href="/2017/01/05/HTML5就是现在：深入了解Polyfills/" class="pre">HTML5就是现在：深入了解Polyfills</a><a href="/2016/12/30/Ajax进阶/" class="next">Ajax进阶</a></div><div data-thread-key="2017/01/05/Javascript异步编程的4种方法/" data-title="Javascript异步编程的4种方法" data-url="http://www.wanyifeng.top/2017/01/05/Javascript异步编程的4种方法/" class="ds-share flat"><div class="ds-share-inline"><ul class="ds-share-icons-16"><li data-toggle="ds-share-icons-more"><a href="javascript:void(0);" class="ds-more">分享到:</a></li><li><a href="javascript:void(0);" data-service="weibo" class="ds-weibo">微博</a></li><li><a href="javascript:void(0);" data-service="qzone" class="ds-qzone">QQ空间</a></li><li><a href="javascript:void(0);" data-service="qqt" class="ds-qqt">腾讯微博</a></li><li><a href="javascript:void(0);" data-service="wechat" class="ds-wechat">微信</a></li></ul><div class="ds-share-icons-more"></div></div></div><div id="comments"><div data-thread-key="2017/01/05/Javascript异步编程的4种方法/" data-title="Javascript异步编程的4种方法" data-url="http://www.wanyifeng.top/2017/01/05/Javascript异步编程的4种方法/" data-author-key="1" class="ds-thread"></div></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="widget"><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="请输入关键字..."/></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-gui"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Angular/">Angular</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bootstrap/">Bootstrap</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SQL/">SQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ajax/">ajax</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/canvas/">canvas</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/jQuery/">jQuery</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">32</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/node/">node</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂文/">杂文</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/构建工具/">构建工具</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/">移动端</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/轮子/">轮子</a><span class="category-list-count">13</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 标签</i></div><div class="tagcloud"><a href="/tags/canvas/" style="font-size: 15px;">canvas</a> <a href="/tags/js/" style="font-size: 15px;">js</a> <a href="/tags/Angular/" style="font-size: 15px;">Angular</a> <a href="/tags/构建工具/" style="font-size: 15px;">构建工具</a> <a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/兼容/" style="font-size: 15px;">兼容</a> <a href="/tags/HTML5/" style="font-size: 15px;">HTML5</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/http/" style="font-size: 15px;">http</a> <a href="/tags/jsonp/" style="font-size: 15px;">jsonp</a> <a href="/tags/MV/" style="font-size: 15px;">MV*</a> <a href="/tags/继承/" style="font-size: 15px;">继承</a> <a href="/tags/Vue/" style="font-size: 15px;">Vue</a> <a href="/tags/ajax/" style="font-size: 15px;">ajax</a> <a href="/tags/Bootstrap/" style="font-size: 15px;">Bootstrap</a> <a href="/tags/能力检测/" style="font-size: 15px;">能力检测</a> <a href="/tags/innerText/" style="font-size: 15px;">innerText</a> <a href="/tags/jQuery/" style="font-size: 15px;">jQuery</a> <a href="/tags/轮子/" style="font-size: 15px;">轮子</a> <a href="/tags/node/" style="font-size: 15px;">node</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/移动端/" style="font-size: 15px;">移动端</a> <a href="/tags/杂文/" style="font-size: 15px;">杂文</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a> <a href="/tags/动画/" style="font-size: 15px;">动画</a> <a href="/tags/SQL/" style="font-size: 15px;">SQL</a> <a href="/tags/服务器/" style="font-size: 15px;">服务器</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-fei"> 归档</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/04/26/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/03/简单sql入门(一)/">SQL入门(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/30/CSS3/">css3小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/30/python基础篇(二)/">python基础篇(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/28/python基础篇(一)/">python基础篇(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/01/bootstrap栅格系统使用/">bootstrap栅格系统使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/28/jq遮罩插件(对象版本)/">jq遮罩插件(对象版本)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/js字符串公共部分比较/">js字符串公共部分比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/21/前端工程发布优化/">前端工程-发布优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/18/js异步特性/">js异步特性</a></li></ul></div><div class="widget"><div class="comments-title"><i class="fa fa-commt"> 最近评论</i></div><div data-num-items="5" data-show-avatars="0" data-show-time="1" data-show-admin="0" data-excerpt-length="32" data-show-title="1" class="ds-recent-comments"></div></div></div></div></div><a id="totop" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.3.0" async></script><div id="footer"><div class="footer-info"><p><a href="/baidusitemap.xml">网站地图</a> |<span>联系博主：<a href="https://github.com/WanYiFeng" target="_blank" class="fa fa-github"> </a></span></p><p><span> 作者: &copy; <a href="/." rel="nofollow">万翼峰</a></span></p></div></div></div><script>var duoshuoQuery = {short_name:'wanyifeng'};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    document.getElementsByTagName('body')[0].appendChild(ds);
+})();
+</script><script type="text/javascript" src="/js/search.json.js?v=1.3.0"></script></body></html>
