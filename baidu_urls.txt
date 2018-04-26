@@ -1,4 +1,3 @@
-http://www.wanyifeng.top/2018/04/26/hello-world/
 http://www.wanyifeng.top/2017/10/05/JSON数据变化diff算法JS/
 http://www.wanyifeng.top/2017/10/05/动态加载js/
 http://www.wanyifeng.top/2017/10/05/文件大小单位装换/
@@ -98,3 +97,4 @@ http://www.wanyifeng.top/2015/06/05/vue-resource/
 http://www.wanyifeng.top/2015/05/18/移动端touch事件/
 http://www.wanyifeng.top/2015/05/05/js的json解析/
 http://www.wanyifeng.top/2015/04/18/js轮播图原理/
+http://www.wanyifeng.top/2015/04/12/注册移除事件兼容代码以及获取事件参数/
