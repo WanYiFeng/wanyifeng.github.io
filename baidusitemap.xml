@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://www.wanyifeng.top/2016/10/10/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2018-11-01T08:39:54.491Z</lastmod>
+    <data>
+        <display>
+        <title>发布—订阅模式</title>
+        <pubTime>2016-10-10T01:35:12.000Z</pubTime>
+        
+        <tag>设计模式</tag>
+         
+         
+           
+             
+              <breadCrumb title="设计模式" url="http://www.wanyifeng.top/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.wanyifeng.top/2017/10/05/JSON%E6%95%B0%E6%8D%AE%E5%8F%98%E5%8C%96diff%E7%AE%97%E6%B3%95JS/</loc>
     <lastmod>2018-04-26T03:55:25.142Z</lastmod>
     <data>
@@ -25,7 +45,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2017/10/05/%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BDjs/</loc>
-    <lastmod>2018-04-26T03:54:18.561Z</lastmod>
+    <lastmod>2018-04-26T03:54:18.560Z</lastmod>
     <data>
         <display>
         <title>文件大小单位装换</title>
@@ -65,7 +85,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2017/10/04/es6/</loc>
-    <lastmod>2018-04-26T03:49:52.482Z</lastmod>
+    <lastmod>2018-04-26T03:49:52.481Z</lastmod>
     <data>
         <display>
         <title>es6简单梳理</title>
@@ -209,7 +229,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2017/05/12/js%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%85%AC%E5%85%B1%E9%83%A8%E5%88%86%E6%AF%94%E8%BE%83/</loc>
-    <lastmod>2017-06-11T15:02:25.132Z</lastmod>
+    <lastmod>2017-06-11T15:02:25.131Z</lastmod>
     <data>
         <display>
         <title>js字符串公共部分比较</title>
@@ -231,7 +251,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2015/12/14/%E5%8F%8C%E5%90%91%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E7%9A%84%E5%86%85%E9%83%A8%E6%B5%81%E7%A8%8B/</loc>
-    <lastmod>2017-04-13T15:04:51.867Z</lastmod>
+    <lastmod>2017-04-13T15:04:51.866Z</lastmod>
     <data>
         <display>
         <title>双向数据绑定的内部流程</title>
@@ -271,7 +291,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2016/12/25/rem%E7%99%BE%E5%88%86%E6%AF%94%E5%B8%83%E5%B1%80/</loc>
-    <lastmod>2017-04-13T14:22:40.522Z</lastmod>
+    <lastmod>2017-04-13T14:22:40.521Z</lastmod>
     <data>
         <display>
         <title>rem百分比布局</title>
@@ -337,7 +357,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2016/07/10/%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E/</loc>
-    <lastmod>2017-04-11T12:59:38.393Z</lastmod>
+    <lastmod>2017-04-11T12:59:38.392Z</lastmod>
     <data>
         <display>
         <title>模板引擎使用</title>
@@ -357,7 +377,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2016/11/14/jQuery%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81/</loc>
-    <lastmod>2017-04-11T12:41:32.920Z</lastmod>
+    <lastmod>2017-04-11T12:41:32.919Z</lastmod>
     <data>
         <display>
         <title>jQuery核心代码</title>
@@ -399,7 +419,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2016/05/20/%E5%87%BD%E6%95%B0%E7%9A%84%E5%9B%9B%E7%A7%8D%E8%B0%83%E7%94%A8%E6%A8%A1%E5%BC%8F/</loc>
-    <lastmod>2017-04-11T12:31:43.505Z</lastmod>
+    <lastmod>2017-04-11T12:31:43.504Z</lastmod>
     <data>
         <display>
         <title>函数的四种调用模式</title>
@@ -479,7 +499,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2016/10/11/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</loc>
-    <lastmod>2017-04-11T11:50:49.543Z</lastmod>
+    <lastmod>2017-04-11T11:50:49.542Z</lastmod>
     <data>
         <display>
         <title>正则表达式</title>
@@ -499,7 +519,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2016/05/04/dom%E7%9B%B8%E5%85%B3/</loc>
-    <lastmod>2017-04-11T11:49:27.243Z</lastmod>
+    <lastmod>2017-04-11T11:49:27.242Z</lastmod>
     <data>
         <display>
         <title>Don操作相关</title>
@@ -519,7 +539,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2016/08/14/%E5%8E%9F%E7%94%9F%E5%AE%9E%E7%8E%B0%E5%B0%8F%E6%98%9F%E6%98%9F%E8%AF%84%E8%AE%BA/</loc>
-    <lastmod>2017-04-11T11:48:51.741Z</lastmod>
+    <lastmod>2017-04-11T11:48:51.740Z</lastmod>
     <data>
         <display>
         <title>原生实现小星星评论</title>
@@ -541,7 +561,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2016/09/12/js%E4%BA%8B%E4%BB%B6/</loc>
-    <lastmod>2017-04-11T11:46:09.884Z</lastmod>
+    <lastmod>2017-04-11T11:46:09.883Z</lastmod>
     <data>
         <display>
         <title>js事件代理</title>
@@ -561,7 +581,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2016/04/10/Array%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/</loc>
-    <lastmod>2017-04-11T11:43:52.373Z</lastmod>
+    <lastmod>2017-04-11T11:43:52.372Z</lastmod>
     <data>
         <display>
         <title>Array常用方法</title>
@@ -601,7 +621,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2017/01/18/vue%E6%8A%80%E6%9C%AF%E6%A0%88%E4%B8%8E%E5%9F%BA%E4%BA%8EVue%E7%9A%84ui%E6%A1%86%E6%9E%B6/</loc>
-    <lastmod>2017-04-10T16:21:35.041Z</lastmod>
+    <lastmod>2017-04-10T16:21:35.040Z</lastmod>
     <data>
         <display>
         <title>vue技术栈与常用基于Vue的ui框架</title>
@@ -621,7 +641,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2015/12/03/CSS%E5%B8%B8%E7%94%A8%E9%80%89%E6%8B%A9%E5%99%A8/</loc>
-    <lastmod>2017-04-08T16:11:44.801Z</lastmod>
+    <lastmod>2017-04-08T16:11:44.800Z</lastmod>
     <data>
         <display>
         <title>CSS 选择器的入门</title>
@@ -663,7 +683,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2017/02/21/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8F%91%E5%B8%83%E4%BC%98%E5%8C%96/</loc>
-    <lastmod>2017-04-03T14:23:48.344Z</lastmod>
+    <lastmod>2017-04-03T14:23:48.343Z</lastmod>
     <data>
         <display>
         <title>前端工程-发布优化</title>
@@ -683,7 +703,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2017/02/12/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93%C2%A0/</loc>
-    <lastmod>2017-04-03T14:22:20.692Z</lastmod>
+    <lastmod>2017-04-03T14:22:20.691Z</lastmod>
     <data>
         <display>
         <title>移动端web开发常见问题</title>
@@ -703,7 +723,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2016/12/21/%E9%9B%85%E8%99%8E%E7%9A%8414%E6%9D%A1%E4%BC%98%E5%8C%96%E5%8E%9F%E5%88%99/</loc>
-    <lastmod>2017-04-02T13:54:10.499Z</lastmod>
+    <lastmod>2017-04-02T13:54:10.498Z</lastmod>
     <data>
         <display>
         <title>雅虎的14条优化原则</title>
@@ -728,28 +748,8 @@
 
     
   <url>
-    <loc>http://www.wanyifeng.top/2016/10/10/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F%E6%A8%A1%E5%BC%8F/</loc>
-    <lastmod>2017-04-02T10:56:44.903Z</lastmod>
-    <data>
-        <display>
-        <title>发布—订阅模式</title>
-        <pubTime>2016-10-10T01:35:12.000Z</pubTime>
-        
-        <tag>设计模式</tag>
-         
-         
-           
-             
-              <breadCrumb title="设计模式" url="http://www.wanyifeng.top/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.wanyifeng.top/2016/10/09/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/</loc>
-    <lastmod>2017-04-02T10:45:02.605Z</lastmod>
+    <lastmod>2017-04-02T10:45:02.604Z</lastmod>
     <data>
         <display>
         <title>代理模式</title>
@@ -771,7 +771,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2016/09/26/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/</loc>
-    <lastmod>2017-04-02T10:33:17.688Z</lastmod>
+    <lastmod>2017-04-02T10:33:17.687Z</lastmod>
     <data>
         <display>
         <title>策略模式</title>
@@ -815,7 +815,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2016/01/05/Git/</loc>
-    <lastmod>2017-04-02T10:02:36.767Z</lastmod>
+    <lastmod>2017-04-02T10:02:36.766Z</lastmod>
     <data>
         <display>
         <title>Git基础入门</title>
@@ -856,7 +856,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2016/11/05/canvas%E5%AE%9E%E7%8E%B0%E5%88%AE%E5%88%AE%E4%B9%90%E6%95%88%E6%9E%9C/</loc>
-    <lastmod>2017-04-01T09:32:25.831Z</lastmod>
+    <lastmod>2017-04-01T09:32:25.830Z</lastmod>
     <data>
         <display>
         <title>canvas实现刮刮乐效果</title>
@@ -902,7 +902,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2016/01/05/jquery/</loc>
-    <lastmod>2017-04-01T09:13:42.717Z</lastmod>
+    <lastmod>2017-04-01T09:13:42.716Z</lastmod>
     <data>
         <display>
         <title>jQuery动画API</title>
@@ -1066,7 +1066,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2016/07/18/JS%E8%BF%90%E7%AE%97%E7%AC%A6/</loc>
-    <lastmod>2017-04-01T07:54:22.674Z</lastmod>
+    <lastmod>2017-04-01T07:54:22.673Z</lastmod>
     <data>
         <display>
         <title>JS运算符</title>
@@ -1106,7 +1106,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2016/05/25/%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/</loc>
-    <lastmod>2017-04-01T07:39:08.304Z</lastmod>
+    <lastmod>2017-04-01T07:39:08.303Z</lastmod>
     <data>
         <display>
         <title>本地存储</title>
@@ -1146,7 +1146,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2016/09/12/xxh%E6%94%BB%E5%87%BB%E8%B7%A8%E5%9F%9F%E8%84%9A%E6%9C%AC%E6%94%BB/</loc>
-    <lastmod>2017-03-31T14:53:36.863Z</lastmod>
+    <lastmod>2017-03-31T14:53:36.862Z</lastmod>
     <data>
         <display>
         <title>XSS跨站脚本攻击</title>
@@ -1246,7 +1246,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2017/01/08/Vue%E7%BB%84%E4%BB%B6%E5%8C%96%E5%BC%80%E5%8F%91/</loc>
-    <lastmod>2017-03-31T14:34:46.313Z</lastmod>
+    <lastmod>2017-03-31T14:34:46.312Z</lastmod>
     <data>
         <display>
         <title>Vue组件化开发</title>
@@ -1286,7 +1286,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2016/12/28/Vue%E5%AE%9E%E4%BE%8B%E8%AF%A6%E8%A7%A3%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</loc>
-    <lastmod>2017-03-31T14:32:29.635Z</lastmod>
+    <lastmod>2017-03-31T14:32:29.634Z</lastmod>
     <data>
         <display>
         <title>Vue生命周期</title>
@@ -1306,7 +1306,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2016/12/21/Vue%E5%AE%9E%E4%BE%8B%E7%9A%84%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE/</loc>
-    <lastmod>2017-03-31T14:31:52.870Z</lastmod>
+    <lastmod>2017-03-31T14:31:52.869Z</lastmod>
     <data>
         <display>
         <title>Vue实例的全局配置</title>
@@ -1346,7 +1346,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2016/12/17/Vue%E7%AE%80%E4%BB%8B/</loc>
-    <lastmod>2017-03-31T14:29:00.900Z</lastmod>
+    <lastmod>2017-03-31T14:29:00.899Z</lastmod>
     <data>
         <display>
         <title>Vue-Vue简介</title>
@@ -1366,7 +1366,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2016/02/18/Ajax/</loc>
-    <lastmod>2017-03-31T14:27:59.793Z</lastmod>
+    <lastmod>2017-03-31T14:27:59.792Z</lastmod>
     <data>
         <display>
         <title>ajax</title>
@@ -1388,7 +1388,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2015/06/05/ajax%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2017-03-31T14:27:45.370Z</lastmod>
+    <lastmod>2017-03-31T14:27:45.369Z</lastmod>
     <data>
         <display>
         <title>ajax原生 ajax jQuery</title>
@@ -1410,7 +1410,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2015/05/18/%E7%A7%BB%E5%8A%A8%E7%AB%AFtouch%E4%BA%8B%E4%BB%B6/</loc>
-    <lastmod>2017-03-31T14:26:10.178Z</lastmod>
+    <lastmod>2017-03-31T14:26:10.177Z</lastmod>
     <data>
         <display>
         <title>原生js的触摸事件</title>
@@ -1450,7 +1450,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2015/05/05/js%E7%9A%84json%E8%A7%A3%E6%9E%90/</loc>
-    <lastmod>2017-03-31T14:06:26.965Z</lastmod>
+    <lastmod>2017-03-31T14:06:26.964Z</lastmod>
     <data>
         <display>
         <title>js的JSON解析</title>
@@ -1470,7 +1470,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2015/07/11/js%E7%AE%80%E5%8D%95%E5%8A%A8%E7%94%BBdemo/</loc>
-    <lastmod>2017-03-31T13:57:28.888Z</lastmod>
+    <lastmod>2017-03-31T13:57:28.887Z</lastmod>
     <data>
         <display>
         <title>js简单功能Demo</title>
@@ -1490,7 +1490,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2015/11/01/js%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A%E4%B8%8E%E7%A7%BB%E9%99%A4/</loc>
-    <lastmod>2017-03-31T13:48:51.208Z</lastmod>
+    <lastmod>2017-03-31T13:48:51.207Z</lastmod>
     <data>
         <display>
         <title>js事件绑定与移除</title>
@@ -1550,7 +1550,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2016/02/20/js%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1/</loc>
-    <lastmod>2017-03-31T12:55:39.023Z</lastmod>
+    <lastmod>2017-03-31T12:55:39.022Z</lastmod>
     <data>
         <display>
         <title>js阻止事件冒泡</title>
@@ -1570,7 +1570,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2016/03/05/js%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F/</loc>
-    <lastmod>2017-03-31T12:35:25.345Z</lastmod>
+    <lastmod>2017-03-31T12:35:25.344Z</lastmod>
     <data>
         <display>
         <title>js严格模式</title>
@@ -1652,7 +1652,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2017/01/05/Javascript%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E7%9A%844%E7%A7%8D%E6%96%B9%E6%B3%95/</loc>
-    <lastmod>2017-03-30T05:59:53.365Z</lastmod>
+    <lastmod>2017-03-30T05:59:53.364Z</lastmod>
     <data>
         <display>
         <title>Javascript异步编程的4种方法</title>
@@ -1694,7 +1694,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2015/07/24/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/</loc>
-    <lastmod>2017-03-29T09:34:49.946Z</lastmod>
+    <lastmod>2017-03-29T09:34:49.945Z</lastmod>
     <data>
         <display>
         <title>深拷贝和浅拷贝</title>
@@ -1736,7 +1736,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2015/04/12/%E6%B3%A8%E5%86%8C%E7%A7%BB%E9%99%A4%E4%BA%8B%E4%BB%B6%E5%85%BC%E5%AE%B9%E4%BB%A3%E7%A0%81%E4%BB%A5%E5%8F%8A%E8%8E%B7%E5%8F%96%E4%BA%8B%E4%BB%B6%E5%8F%82%E6%95%B0/</loc>
-    <lastmod>2017-03-29T07:26:31.577Z</lastmod>
+    <lastmod>2017-03-29T07:26:31.576Z</lastmod>
     <data>
         <display>
         <title>注册移除事件兼容代码以及获取事件参数</title>
@@ -1758,7 +1758,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2017/02/10/%E4%BC%98%E9%9B%85%E9%99%8D%E7%BA%A7%E5%92%8C%E6%B8%90%E8%BF%9B%E5%A2%9E%E5%BC%BA/</loc>
-    <lastmod>2017-03-29T07:26:01.070Z</lastmod>
+    <lastmod>2017-03-29T07:26:01.069Z</lastmod>
     <data>
         <display>
         <title>优雅降级和渐进增强</title>
@@ -1780,7 +1780,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2015/07/05/%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%E9%95%BF%E9%93%BE%E6%8E%A5/</loc>
-    <lastmod>2017-03-29T07:24:32.682Z</lastmod>
+    <lastmod>2017-03-29T07:24:32.681Z</lastmod>
     <data>
         <display>
         <title>前端实现长链接</title>
@@ -1824,7 +1824,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2015/04/05/%E8%8E%B7%E5%8F%96%E5%85%84%E5%BC%9F%E5%85%83%E7%B4%A0/</loc>
-    <lastmod>2017-03-29T07:21:57.757Z</lastmod>
+    <lastmod>2017-03-29T07:21:57.756Z</lastmod>
     <data>
         <display>
         <title>获取兄弟元素</title>
@@ -1846,7 +1846,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2015/04/05/%E8%8E%B7%E5%8F%96%E7%88%B6%E5%85%83%E7%B4%A0%E4%B8%AD%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0/</loc>
-    <lastmod>2017-03-29T07:21:38.971Z</lastmod>
+    <lastmod>2017-03-29T07:21:38.970Z</lastmod>
     <data>
         <display>
         <title>获取父元素中的最后一个元素</title>
@@ -1890,7 +1890,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2016/04/05/%E8%8E%B7%E5%8F%96%E5%90%8E%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0/</loc>
-    <lastmod>2017-03-29T07:21:23.718Z</lastmod>
+    <lastmod>2017-03-29T07:21:23.717Z</lastmod>
     <data>
         <display>
         <title>获取当前元素的后一个元素</title>
@@ -1932,7 +1932,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2016/02/15/%E5%8A%A8%E7%94%BB%E7%9B%B8%E5%85%B3-%E7%BC%93%E5%8A%A8%E5%8A%A8%E7%94%BB/</loc>
-    <lastmod>2017-03-29T07:18:44.987Z</lastmod>
+    <lastmod>2017-03-29T07:18:44.986Z</lastmod>
     <data>
         <display>
         <title>动画相关-缓动动画</title>
@@ -1996,7 +1996,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2016/06/15/--save%20%E5%92%8C%20--save%20-dev%E7%9A%84%E5%8C%BA%E5%88%AB/</loc>
-    <lastmod>2017-03-29T07:15:49.189Z</lastmod>
+    <lastmod>2017-03-29T07:15:49.188Z</lastmod>
     <data>
         <display>
         <title>--save 和 --save -dev的区别</title>
@@ -2076,7 +2076,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2015/04/18/js%E8%BD%AE%E6%92%AD%E5%9B%BE%E5%8E%9F%E7%90%86/</loc>
-    <lastmod>2017-03-29T07:08:27.906Z</lastmod>
+    <lastmod>2017-03-29T07:08:27.905Z</lastmod>
     <data>
         <display>
         <title>轮播图简单实现</title>
@@ -2100,7 +2100,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2016/10/17/HTTP%20%E5%8D%8F%E8%AE%AE%E5%85%A5%E9%97%A8/</loc>
-    <lastmod>2017-03-29T07:06:27.130Z</lastmod>
+    <lastmod>2017-03-29T07:06:27.129Z</lastmod>
     <data>
         <display>
         <title>HTTP 协议入门</title>
@@ -2164,7 +2164,7 @@
     
   <url>
     <loc>http://www.wanyifeng.top/2015/03/08/innerText%E8%83%BD%E5%8A%9B%E6%A3%80%E6%B5%8B/</loc>
-    <lastmod>2017-03-07T03:22:47.753Z</lastmod>
+    <lastmod>2017-03-07T03:22:47.752Z</lastmod>
     <data>
         <display>
         <title>innerText能力检测</title>
