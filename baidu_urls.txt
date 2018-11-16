@@ -1,3 +1,4 @@
+http://www.wanyifeng.top/2017/12/20/精度丢失问题解决方法/
 http://www.wanyifeng.top/2017/12/10/svn-ubuntu服务器/
 http://www.wanyifeng.top/2017/10/05/JSON数据变化diff算法JS/
 http://www.wanyifeng.top/2017/10/05/动态加载js/
@@ -93,8 +94,7 @@ http://www.wanyifeng.top/2015/07/24/深拷贝和浅拷贝/
 http://www.wanyifeng.top/2015/07/11/js简单动画demo/
 http://www.wanyifeng.top/2015/07/08/jQuery的deferred对象详解/
 http://www.wanyifeng.top/2015/07/05/前端实现长链接/
-http://www.wanyifeng.top/2015/06/05/vue-resource/
 http://www.wanyifeng.top/2015/06/05/ajax入门学习笔记/
+http://www.wanyifeng.top/2015/06/05/vue-resource/
 http://www.wanyifeng.top/2015/05/18/移动端touch事件/
 http://www.wanyifeng.top/2015/05/05/js的json解析/
-http://www.wanyifeng.top/2015/04/18/js轮播图原理/
