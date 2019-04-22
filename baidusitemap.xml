@@ -3,6 +3,27 @@
 
 
     
+    
+  <url>
+    <loc>http://www.wanyifeng.top/2018/04/22/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%8D%B3%E6%97%B6%E9%80%9A%E8%AE%AF%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/</loc>
+    <lastmod>2019-04-22T07:13:19.671Z</lastmod>
+    <data>
+        <display>
+        <title>音视频即时通讯服务器搭建</title>
+        <pubTime>2018-04-22T07:11:20.000Z</pubTime>
+        
+        <tag>服务器</tag>
+         
+         
+           
+             
+              <breadCrumb title="服务器" url="http://www.wanyifeng.top/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
   <url>
     <loc>http://www.wanyifeng.top/2017/12/20/%E7%B2%BE%E5%BA%A6%E4%B8%A2%E5%A4%B1%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</loc>
     <lastmod>2018-11-16T06:21:45.143Z</lastmod>
@@ -709,9 +730,9 @@
         <title>Ajax进阶</title>
         <pubTime>2016-12-30T12:13:21.000Z</pubTime>
         
-        <tag>js</tag>
-         
         <tag>ajax</tag>
+         
+        <tag>js</tag>
          
          
            
@@ -771,9 +792,9 @@
         <title>雅虎的14条优化原则</title>
         <pubTime>2016-12-21T06:33:21.000Z</pubTime>
         
-        <tag>js</tag>
-         
         <tag>ajax</tag>
+         
+        <tag>js</tag>
          
         <tag>css</tag>
          
@@ -895,7 +916,6 @@
     </url>
 
     
-    
   <url>
     <loc>http://www.wanyifeng.top/2016/11/05/canvas%E5%AE%9E%E7%8E%B0%E5%88%AE%E5%88%AE%E4%B9%90%E6%95%88%E6%9E%9C/</loc>
     <lastmod>2017-04-01T09:32:25.830Z</lastmod>
@@ -926,9 +946,9 @@
         <title>jQuery的deferred对象详解</title>
         <pubTime>2015-07-08T03:33:01.000Z</pubTime>
         
-        <tag>js</tag>
-         
         <tag>ajax</tag>
+         
+        <tag>js</tag>
          
         <tag>jQuery</tag>
          
@@ -1414,9 +1434,9 @@
         <title>ajax</title>
         <pubTime>2016-02-18T04:33:21.000Z</pubTime>
         
-        <tag>js</tag>
-         
         <tag>ajax</tag>
+         
+        <tag>js</tag>
          
          
            
@@ -1436,9 +1456,9 @@
         <title>ajax原生 ajax jQuery</title>
         <pubTime>2015-06-05T03:13:01.000Z</pubTime>
         
-        <tag>js</tag>
-         
         <tag>ajax</tag>
+         
+        <tag>js</tag>
          
          
            
@@ -1678,9 +1698,9 @@
         <title>ES6 Promise</title>
         <pubTime>2016-02-05T11:03:21.000Z</pubTime>
         
-        <tag>js</tag>
-         
         <tag>ajax</tag>
+         
+        <tag>js</tag>
          
          
            
@@ -1700,9 +1720,9 @@
         <title>Javascript异步编程的4种方法</title>
         <pubTime>2017-01-05T06:33:21.000Z</pubTime>
         
-        <tag>js</tag>
-         
         <tag>ajax</tag>
+         
+        <tag>js</tag>
          
          
            
@@ -1828,9 +1848,9 @@
         <title>前端实现长链接</title>
         <pubTime>2015-07-05T10:13:21.000Z</pubTime>
         
-        <tag>js</tag>
-         
         <tag>ajax</tag>
+         
+        <tag>js</tag>
          
          
            
