@@ -1,4 +1,4 @@
-http://www.wanyifeng.top/2018/04/22/音视频即时通讯服务器搭建/
+http://www.wanyifeng.top/2019/04/22/音视频即时通讯服务器搭建/
 http://www.wanyifeng.top/2017/12/20/精度丢失问题解决方法/
 http://www.wanyifeng.top/2017/12/10/svn-ubuntu服务器/
 http://www.wanyifeng.top/2017/10/05/JSON数据变化diff算法JS/
@@ -23,8 +23,8 @@ http://www.wanyifeng.top/2017/01/12/前端攻击都有哪些形式，我该如�
 http://www.wanyifeng.top/2017/01/12/JSONP原理/
 http://www.wanyifeng.top/2017/01/08/Vue组件化开发/
 http://www.wanyifeng.top/2017/01/05/Pointfree 编程风格指南/
-http://www.wanyifeng.top/2017/01/05/Javascript异步编程的4种方法/
 http://www.wanyifeng.top/2017/01/05/HTML5就是现在：深入了解Polyfills/
+http://www.wanyifeng.top/2017/01/05/Javascript异步编程的4种方法/
 http://www.wanyifeng.top/2016/12/30/Ajax进阶/
 http://www.wanyifeng.top/2016/12/28/Vue实例详解与生命周期/
 http://www.wanyifeng.top/2016/12/25/rem百分比布局/
